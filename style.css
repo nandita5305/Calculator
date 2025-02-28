@@ -1,5 +1,3 @@
-/* CSS for Enhanced Calculator */
-
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +8,18 @@
 .container {
     width: 100%;
     height: 100vh;
-    background: #e3f9ff; /* Changed from gradient to solid color */
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.light-mode {
+    background: #e3f9ff;
+}
+
+.dark-mode {
+    background: #121212;
 }
 
 .calculator {
@@ -54,11 +60,46 @@ form .display input {
     border-radius: 10px;
 }
 
-
 form input.operator {
     color: #33ffd8;
 }
 
 form input:hover {
     background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* Mode Toggle Styling */
+.mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    background: transparent; /* Transparent background */
+    cursor: pointer;
+    font-size: 24px;
+    transition: color 0.3s ease;
+    padding: 10px; /* Add padding for space around the icon */
+    border-radius: 50%; /* Round the button to make it circular */
+}
+
+#mode-icon {
+    background-color: #e3f9ff; /* Light mode background */
+    padding: 8px; /* Padding around the icon */
+    border-radius: 50%;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+body.dark-mode .mode-toggle #mode-icon {
+    background-color: #121212; /* Dark mode background */
+}
+
+.mode-toggle i {
+    color: #333; /* Icon color */
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .mode-toggle i {
+    color: white; /* Change icon color in dark mode */
 }

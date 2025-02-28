@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Calculator</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CDN -->
 </head>
-<body>
+<body class="light-mode">
     <div class="container">
+        <button class="mode-toggle" onclick="toggleMode()">
+            <span id="mode-icon">
+                <i class="fas fa-moon"></i> <!-- Initial Moon icon -->
+            </span>
+        </button>
         <div class="calculator">
             <form name="calc">
                 <div class="display">
@@ -66,11 +72,17 @@
         }
 
         function calculateSquareRoot() {
-            document.calc.display.value = Math.sqrt(eval(document.calc.display.value));
+            const value = parseFloat(document.calc.display.value);
+            if (value >= 0) {
+                document.calc.display.value = Math.sqrt(value);
+            } else {
+                document.calc.display.value = "Error";
+            }
         }
 
         function calculateSquare() {
-            document.calc.display.value = Math.pow(eval(document.calc.display.value), 2);
+            const value = parseFloat(document.calc.display.value);
+            document.calc.display.value = value ** 2;
         }
 
         function calculatePercentage() {
@@ -78,7 +90,30 @@
         }
 
         function calculateResult() {
-            document.calc.display.value = eval(document.calc.display.value);
+            try {
+                document.calc.display.value = eval(document.calc.display.value);
+            } catch {
+                document.calc.display.value = "Error";
+            }
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            const modeIcon = document.getElementById("mode-icon");
+            const icon = modeIcon.querySelector('i'); // Get the icon element
+
+            body.classList.toggle("light-mode");
+            body.classList.toggle("dark-mode");
+
+            if (body.classList.contains("dark-mode")) {
+                // Change to sun icon and background color in dark mode
+                icon.classList.remove("fa-moon");
+                icon.classList.add("fa-sun");
+            } else {
+                // Change to moon icon and background color in light mode
+                icon.classList.remove("fa-sun");
+                icon.classList.add("fa-moon");
+            }
         }
     </script>
 </body>
